@@ -1,0 +1,91 @@
+\documentclass[a4paper,11pt]{dinbrief} 
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[autostyle=true,german=quotes]{csquotes}
+\setlength{\headheight}{1.1\baselineskip}
+\usepackage{scrdate}
+\usepackage{footnote}
+\usepackage{scrlayer-scrpage}
+\setlength{\headsep}{10mm}
+\pagestyle{scrheadings}
+\pagenumbering{gobble}
+\hyphenation{Office Pro-gram-mie-rer Bash-Kennt-nis-sen}
+\begin{document}
+\subject{ [% bezeichnung %] }
+\backaddress{Andreas Grell,
+  Kühnehöfe 25,
+  D-22761 Hamburg
+} 
+\signature{Andreas Grell} 
+\Datum{\todaysname, \today} 
+\address{Andreas Grell \\
+  Softwareentwickler, Hispanist, Germanist \\
+  Kühnehöfe 25 \\
+  D-22761 Hamburg} 
+\begin{letter}
+   {
+    [% firma %] \\
+    [% IF anrede == "Herr" %]
+      z.Hd. [% anrede %]n [% ansprechpartner %] \\
+    [% END %]
+    [% IF anrede == "Frau" %]
+      z.Hd. [% anrede %]  [% ansprechpartner %] \\
+    [% END %]
+    [% strasse %] \\ 
+    [% ort %]
+   }
+    %% Dies ist übrigens ein Befehl: \begin{letter}{Adresse}
+    [% IF anrede == 'Herr' %]
+      \opening{ Sehr geehrter [% anrede %] [% ansprechpartner %],}
+    [% ELSIF anrede == 'Frau' %]
+      \opening{ Sehr geehrte [% anrede %] [% ansprechpartner %],}
+    [% ELSE %]
+      \opening{ Sehr geehrte Damen und Herren, }
+    [% END %]
+      durch ihre Stellenanzeige bei [% quelle %] auf [% firma %] aufmerksam geworden, möchte ich mich mit dem vorliegenden Anschreiben als [% bezeichnung %] Ihnen bewerben.
+      
+      Um Ihnen nun vorab eine kleine Vorstellung über mein bisheriges programmiererisches Wirken -- ausführliche,
+      chronologische Angaben hierzu siehe Lebenslauf und Zeugnisse (beides beiliegend) -- zu geben, sei mein
+      Werdegang hier kurz skizziert:
+
+      Begonnen habe ich, nach einem als C/C++-Programmierer unter Linux abgelegten Zertifikat, bei HAVI Solutions
+      GmbH \& Co. KG, einem Hamburger Spezialisten für Datenmigration, als C-, Perl- und Bash-Programmierer, bei
+      dem ich mich sowohl mit der Transformation von SQL-Quelldatenstrukturen in ebensolche Zieldatenstrukturen
+      als auch der Extraktion von Bilddaten aus obsoleten Datencontainerformaten auseinandersetzte. Um die besagten
+      Daten aus den mit herkömmlicher Software nicht mehr zugänglichen Containern zu extrahieren, schrieb ich in
+      C eigene Programme. Nach der Extraktion verarbeitete ich die Bilddaten mit eigenen Python-Programmen weiter.
+
+      Nach einem kurzen Intermezzo mit Django, PostgreSQL und Python bei der Firma nachtblau tv, arbeitete ich bei dem
+      Börsenportal ARIVA in Kiel an der PDF-Erstellung von Produktinformationsblättern mit Hilfe von
+      Perl. Hierbei kam mir meine Vorliebe für reguläre Ausdrücke zugute, mit deren Hilfe ich die Korrektheit
+      der immer wieder notwendigen Änderungen an den auszuliefernden Produktinformationen gewährleistete.
+      
+      Daran schloss sich eine Projektarbeit an einem webbasierten Office-System bei der Hannoveraner Firma
+      Delticom an, in deren Rahmen ich eine Google-Suggest-artige Funktionalität auf der Grundlage von Perl und AJAX
+      entwickelte.
+
+      Zuletzt wirkte ich bei DSS in Stockelsdorf an der Funktionserweiterung der Aboverwaltung mit. Die
+      verwendeten Programmiersprachen waren hier Perl und das zugegebenermaßen schon etwas angestaubte COBOL,
+      das ich eigens für die von mir zu bewältigenden Aufgaben erlernte. Als Datenbanksystem wurde dort die
+      Berkeley Database verwendet.
+
+      Als Sprach- und Literaturwissenschaftler sowie altgedienter Schlussredakteur mit jahrzehntelanger
+      Redaktionserfahrung bei diversen Zeitschriftenverlagen (DER SPIEGEL, TV Movie, TV Spielfilm, PRINZ etc.)
+      verfüge ich zudem über eine ausgeprägte Kommunikationsstärke (sowohl auf Deutsch als auch auf Spanisch
+      und Englisch) und die Fähigkeit, selbst komplexe Sachverhalte allgemeinverständlich sowohl schriftlich als
+      auch mündlich zu vermitteln. Als Text-Layout-System verwende ich mittlerweile bevorzugt \LaTeXe, weil es Texte
+      akkurater formatiert als die gängigen Office-Anwendungen.
+
+      Verfügbar bin ich ab sofort für ein Bruttojahresgehalt von [% gehalt %].
+
+      Unter https://github.com/grellopoulos können sie im Verlauf von Projekten entstandene Codeschnipsel besichtigen.
+      Sollten Ihnen mein hier freilich nur grob umrissenes Profil und das erwähnte Softwarematerial zusagen  und Sie
+      für einen Zeitgenossen wie meine Wenigkeit Verwendung haben, so würde ich mich freuen, persönlich über eine
+      potentielle Tätigkeit bei dataport zu sprechen, und verbleibe
+
+
+\closing{mit freundlichen Grüßen}
+\par
+\encl{Lebenslauf und Zeugnisse} 
+\end{letter} 
+\end{document} 
