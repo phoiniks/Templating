@@ -1,0 +1,79 @@
+\documentclass[a4paper,11pt]{dinbrief} 
+\usepackage[utf8]{inputenc}
+\usepackage[greek.polutoniko, ngerman]{babel}
+\usepackage[autostyle=true,german=quotes]{csquotes}
+\setlength{\headheight}{1.1\baselineskip}
+\usepackage{scrdate}
+\usepackage{footnote}
+\usepackage{scrlayer-scrpage}
+\setlength{\headsep}{10mm}
+\pagestyle{scrheadings}
+\pagenumbering{gobble}
+\hyphenation{ Office }
+\begin{document}
+\subject{ [% bezeichnung %] }
+\backaddress{Andreas Grell,
+  Kühnehöfe 25,
+  D-22761 Hamburg
+} 
+\signature{Andreas Grell} 
+\Datum{\todaysname, \today} 
+\address{Andreas Grell \\
+  Hispanist, Germanist, Softwareentwickler \\
+  Kühnehöfe 25 \\
+  D-22761 Hamburg} 
+\begin{letter}
+    { [% firma %] \\
+    [% IF anrede == 'Herr' %]
+      z.Hd. [% anrede %]n [% ansprechpartner %] \\
+    [% END %]
+    [% IF anrede == 'Frau' %]
+      z.Hd.[% anrede %] [% ansprechpartner %] \\
+    [% END %]
+    [% strasse %] \\ 
+    [% ort %] }
+    % Dies ist übrigens ein Befehl: \begin{letter}{Adresse}
+    [% IF anrede == 'Herr' %]
+      \opening{ Sehr geehrter [% anrede %] [% ansprechpartner %],}
+    [% ELSIF anrede == 'Frau' %]
+      \opening{ Sehr geehrte [% anrede %] [% ansprechpartner %],}
+    [% ELSE %]
+      \opening{ Sehr geehrte Damen und Herren, }
+    [% endif %]      
+
+      durch [% quelle %] auf Ihr Stellenangebot \enquote{ [%- bezeichnung -%] } aufmerksam
+      geworden, möchte ich gern mehr über die Position erfahren.
+      
+      Als Sprach- und Literaturwissenschaftler sowie altgedienter Schlussredakteur mit jahrzehntelanger
+      Redaktionserfahrung bei diversen Zeitschriftenverlagen (DER SPIEGEL, TV Movie, TV Spielfilm, PRINZ etc.)
+      verfüge ich über die Fähigkeit, selbst fachfremden ZeitgenossINNen auch komplexe technische Sachverhalte
+      auf angenehme Art und Weise intersubjektiv zu vermitteln, und könnte mir eine Tätigkeit wie die von Ihnen
+      beschriebene interessant vorstellen.
+
+      Meine Dokumente erstelle ich heute vorwiegend mit dem hervorragenden Textsatzsystem \LaTeX2e, weil
+      es Texte akkurater formatiert als herkömmliche Systeme wie etwa QuarkXPress, bin aber aufgrund meiner
+      Affinität zu allen Themen rund um die Softwareentwicklung und allem, was mit der Texterstellung zu tun hat,
+      dem Kennenlernen und der Verwendung immer neuer Technologien sehr zugeneigt. Zudem setze ich mich seit
+      Jahren mit computerlinguistischen Themen und Fragestellungen um Natural Language Processing auseinander,
+      was Ihrem Unternehmen ebenfalls zugute kommen könnte, wenn wir uns zu einer Zusammenarbeit entschließen
+      könnten.
+
+      Darüber hinaus arbeite ich seit mehr als 5 Jahren als Softwareentwickler bei verschiedenen Firmen, entwickle
+      auch privat Software mit einer ganzen Reihe von Programmiersprachen und Technologien und bin auch mit der
+      Dokumentation in der Informationstechnologie (etwa bei ARIVA: ARDoc, siehe Lebenslauf) sowohl auf
+      Deutsch als auch auf Englisch vertraut.
+
+      Verfügbar bin ich ab sofort für ein Bruttojahresgehalt von [% gehalt %] Euro, wobei die tatsächliche Höhe
+      des Gehalts selbstverständlich immer abhängig von gewissen Rahmenbedingungen (etwa der Anzahl der Urlaubstage)
+      variieren kann.
+
+      Sollte Ihnen mein hier freilich nur grob umrissenes Profil ebenso zusagen wie mir Ihr Stellenangebot,
+      so würde ich mich freuen, Sie und Ihr Unternehmen bei einem unverbindlichen Gespräch näher kennen
+      lernen zu dürfen, und verbleibe
+
+
+\closing{mit freundlichen Grüßen}
+\par
+\encl{Lebenslauf und Zeugnisse} 
+\end{letter} 
+\end{document} 
