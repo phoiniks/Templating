@@ -3,6 +3,8 @@ use Modern::Perl;
 use diagnostics;
 use autodie qw( :all );
 use Hash::Ordered;
+use YAML::XS qw( LoadFile );
+use Encode qw( decode encode );
 use Expect;
 use Log::Log4perl;
 
@@ -16,19 +18,9 @@ my $exp = Expect->new;
 
 $exp->log_file("EXPECTATIONS.LOG", "w");
 
-my $parameters = Hash::Ordered->new(
-    'Bezeichnung: '     => 'Softwareentwickler Perl etc.',
-    'Firma: '           => 'Grellopolis GmbH & Co. KG',
-    'Anrede: '          => 'Herr',
-    'Ansprechpartner: ' => 'Grellopoulos',
-    'Straße: '          => 'Kühnehöfe 25',
-    'Ort: '             => '22761 Hamburg',
-    'Gehalt: '          => '60000',
-    'Quelle: '          => 'stepstone.de',
-    'Telefon: '         => '040 80 60 37 99',
-    'E-Mail: '          => 'andreas.grellopoulos@grellopolis.de',
-    'Angebotstext: '    => 'grellopolis.txt',
-    );
+my $parameters = Hash::Ordered->new();
+
+$parameters = LoadFile( "PARAMETERS.YAML" );
 
 my @prompts = $parameters->keys;
 
@@ -40,8 +32,8 @@ $exp->spawn("./Brief.pl", "TEMPLATE_ENTWICKLUNG.tt");
 
 for ( @prompts ) {
     $log->debug( $_ );
-    my $value = $parameters->get($_);
-    $exp->send( $value . "\r" );
+    my $value = $parameters->get( encode( "UTF-8", $_ ) );
+    $exp->send( encode( "UTF-8", $value ) . "\r" );
     $exp->expect( 1, $_ );
     $log->debug( $value );
     $exp->debug( 3 );
@@ -50,4 +42,4 @@ for ( @prompts ) {
 
 $log->info( "ENDE" );
 
-$exp->hard_close();
+$exp->soft_close();
