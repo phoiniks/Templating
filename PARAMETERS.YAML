@@ -1,0 +1,26 @@
+--- !!perl/array:Hash::Ordered
+- 'Angebotstext: ': Angebotstext
+  'Anrede: ': Anrede
+  'Ansprechpartner: ': Ansprechpartner
+  'Bezeichnung: ': Bezeichnung
+  'E-Mail: ': E-Mail
+  'Firma: ': Firma
+  'Gehalt: ': Gehalt
+  'Ort: ': Ort
+  'Quelle: ': Quelle
+  'Straße: ': Straße
+  'Telefon: ': Telefon
+- - 'Bezeichnung: '
+  - 'Firma: '
+  - 'Anrede: '
+  - 'Ansprechpartner: '
+  - 'Straße: '
+  - 'Ort: '
+  - 'Gehalt: '
+  - 'Quelle: '
+  - 'Telefon: '
+  - 'E-Mail: '
+  - 'Angebotstext: '
+- ~
+- 0
+- 0
