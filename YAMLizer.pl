@@ -29,3 +29,6 @@ my $parameters = Hash::Ordered->new(
     );
 
 my $yaml = DumpFile( "PARAMETERS.YAML", $parameters);
+
+$log->info("ENDE");
+
