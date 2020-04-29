@@ -16,6 +16,11 @@ $log->info( "BEGINN" );
 
 $log->info( $lokalzeit );
 
+if ( !$ARGV[0] ){
+    print "Bitte eine Vorlagedatei angeben!\n";
+    exit(-1)
+}
+
 print "Bezeichnung: ";
 chomp(my $bezeichnung     = <STDIN>);
 
