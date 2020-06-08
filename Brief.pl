@@ -4,6 +4,7 @@ use autodie;
 use String::TT qw( tt );
 use POSIX qw( strftime );
 use Carp qw( croak );
+use DBI;
 use Log::Log4perl;
 
 Log::Log4perl::init( 'log4perl.conf' );
@@ -21,62 +22,105 @@ if ( !$ARGV[0] ){
     exit(-1)
 }
 
+my $dbh = DBI->connect("dbi:SQLite:dbname=bewerbungen.db", "", "", { PrintError => 1, RaiseError => 1 } );
+
+my $create = "CREATE TABLE IF NOT EXISTS bewerbungen(id INTEGER PRIMARY KEY, bezeichnung TEXT,
+    firma TEXT, anrede TEXT, ansprechpartner TEXT, strasse TEXT, ort TEXT, gehalt REAL,
+    quelle TEXT, telefon TEXT, email TEXT, angebotstext TEXT, anschreiben TEXT,
+    zeit DATE DEFAULT (DATETIME('NOW', 'LOCALTIME')))";
+
+my $rv = $dbh->do( $create );
+
+my $insert = "INSERT INTO bewerbungen (bezeichnung, firma, anrede, ansprechpartner, strasse,
+    ort, gehalt, quelle, telefon, email, angebotstext, anschreiben) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+my $sth = $dbh->prepare( $insert );
+
+
+my @input;
+
 print "Bezeichnung: ";
-chomp(my $bezeichnung     = <STDIN>);
-
+chomp( $bezeichnung	= <STDIN> );
+push @input, $bezeichnung;
+    
 print "Firma: ";
-chomp(my $firma           = <STDIN>);
+chomp( $firma		= <STDIN> );
+push @input, $firma;
+    
+$firma			=~ s/\&/\\&/g;
 
-$firma                    =~ s/\&/\\&/g;
-
+    
 $log->debug( $firma );
 
 print "Anrede: ";
-chomp(my $anrede          = <STDIN>);
-
+chomp( $anrede		= <STDIN> );
+push @input, $anrede;
+    
 print "Ansprechpartner: ";
-chomp(my $ansprechpartner = <STDIN>);
-
+chomp( $ansprechpartner	= <STDIN> );
+push @input, $ansprechpartner;
+    
 print "Straße: ";
-chomp(my $strasse         = <STDIN>);
+chomp( $strasse		= <STDIN> );
+push @input, $strasse;
 
 print "Ort: ";
-chomp(my $ort             = <STDIN>);
-
+chomp( $ort		= <STDIN> );
+push @input, $ort;
+    
 print "Gehalt: ";
-chomp(my $gehalt          = <STDIN>);
-
+chomp( $gehalt		= <STDIN> );
+push @input, $gehalt;
+    
 print "Quelle: ";
-chomp(my $quelle          = <STDIN>);
-
+chomp( $quelle		= <STDIN> );
+push @input, $quelle;
+    
 print "Telefon: ";
-chomp(my $telefon         = <STDIN>);
-
+chomp( $telefon		= <STDIN> );
+push @input, $telefon;
+    
 print "E-Mail: ";
-chomp(my $email           = <STDIN>);
-
-print "Angebotstext: ";
-chomp(my $angebot         = <STDIN>);
-
+chomp( $email		= <STDIN> );
+push @input, $email;
+    
 local $/;
 open my $datei, "<", $ARGV[0];
 
 $log->debug( $ARGV[0] );
 
-my $vorlage            = <$datei>;
+my $vorlage		= <$datei>;
 
 close $datei;
 
 
-my ($firma_kurz)       = split / /, $firma, -1;
+my ($firma_kurz)	= split / /, $input[1], -1;
 
 $log->debug( sprintf "FIRMA_KURZ: %s", $firma_kurz );
 
-my ($bezeichnung_kurz) = split / /, $bezeichnung, -1;
+my ($bezeichnung_kurz)	= split / /, $input[0], -1;
 
 $log->debug( sprintf "BEZEICHNUNG_KURZ: %s", $bezeichnung_kurz );
 
-my $ausgabedatei       = $bezeichnung_kurz . "_" . $firma_kurz . "_" . $lokalzeit . ".tex";
+my $angebotstext	= $bezeichnung_kurz . "_" . $firma_kurz . "_" . $lokalzeit . "_ANGEBOT.txt";
+push @input, $angebotstext;
+    
+$log->debug( $angebotstext );
+
+my $text		= `xsel`;
+
+$log->debug( $text );
+
+my $ausgabedatei	= $bezeichnung_kurz . "_" . $firma_kurz . "_" . $lokalzeit . ".tex";
+push @input, $ausgabedatei;
+    
+open my $angebot, ">", $angebotstext;
+
+print $angebot $text;
+
+close $angebot;
+
+$sth->execute( @input );
 
 $log->debug( $ausgabedatei );
 
@@ -84,7 +128,7 @@ open my $out, ">", $ausgabedatei;
 
 print $out sprintf "%s", tt $vorlage;
 
-my $output = `pdflatex $ausgabedatei`
+my $output		= `pdflatex $ausgabedatei`
     or croak "Was ist hier los? $!";
 
 close $out;
@@ -93,4 +137,4 @@ $log->debug( $output );
 
 $log->info( "ENDE" );
 
- exit;
+exit;
