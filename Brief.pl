@@ -20,7 +20,7 @@ $log->info( $lokalzeit );
 
 if ( !$ARGV[0] ){
     print "Bitte eine Vorlagedatei angeben!\n";
-    exit(-1)
+    exit(-1);
 }
 
 my $dbh						= DBI->connect("dbi:SQLite:dbname=bewerbungen.db", "", "", { PrintError => 1, RaiseError => 1 } );
@@ -143,7 +143,7 @@ close $out;
 
 $log->debug( $output );
 
-copy("bewerbungen.db", "~/bewerbungen_$lokalzeit.db")
+copy("bewerbungen.db", "~/bewerbungen_$lokalzeit.db");
 
 $log->info( "ENDE" );
 
