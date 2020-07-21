@@ -1,10 +1,10 @@
 #!/usr/bin/perl
 use File::Copy qw( copy );
+use POSIX qw( strftime );
+use Carp qw( croak );
 use Modern::Perl;
 use autodie;
 use String::TT qw( tt );
-use POSIX qw( strftime );
-use Carp qw( croak );
 use DBI;
 use Log::Log4perl;
 
@@ -37,19 +37,24 @@ my $insert					= "INSERT INTO bewerbungen (bezeichnung, firma, anrede, ansprechp
 
 my $sth						= $dbh->prepare( $insert );
 
-
 my @input;
 
 print "Bezeichnung: ";
 chomp( my $bezeichnung				= <STDIN> );
+$bezeichnung					=~ s/\*/_/g;
 push @input, $bezeichnung;
     
 print "Firma: ";
 chomp( my $firma				= <STDIN> );
+
 push @input, $firma;
 
 $firma						=~ s/\&/\\&/g;
-    
+
+print "Kennziffer: ";
+chomp( my $kennziffer				= <STDIN> );
+$kennziffer					=~ s/_/\_/g;
+
 $log->debug( $firma );
 
 print "Anrede: ";
@@ -91,7 +96,6 @@ print "E-Mail: ";
 chomp( my $email				= <STDIN> );
 push @input, $email;
 
-
 local $/;
 open my $datei, "<", $ARGV[0];
 
@@ -113,21 +117,21 @@ $log->debug( sprintf "BEZEICHNUNG_KURZ: %s", $bezeichnung_kurz );
 my $angebotstext				= $bezeichnung_kurz . "_" . $firma_kurz . "_" . $lokalzeit . "_ANGEBOT.txt";
 push @input, $angebotstext;
     
-$log->debug( $angebotstext );
+open my $angebot, ">", $angebotstext;
 
 my $text					= `xsel`;
+
+print $angebot $text . "\n";
+
+close $angebot;
+
+$log->debug( $angebotstext );
 
 $log->debug( $text );
 
 my $ausgabedatei				= $bezeichnung_kurz . "_" . $firma_kurz . "_" . $lokalzeit . ".tex";
 push @input, $ausgabedatei;
     
-open my $angebot, ">", $angebotstext;
-
-print $angebot $text;
-
-close $angebot;
-
 $sth->execute( @input );
 
 $log->debug( $ausgabedatei );
@@ -143,7 +147,9 @@ close $out;
 
 $log->debug( $output );
 
-copy("bewerbungen.db", "~/bewerbungen_$lokalzeit.db");
+$lokalzeit					=~ s/ /_/g;
+
+copy("bewerbungen.db", "$ENV{HOME}/bewerbungen_$lokalzeit.db");
 
 $log->info( "ENDE" );
 

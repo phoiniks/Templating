@@ -23,23 +23,30 @@
   Kühnehöfe 25 \\
   D-22761 Hamburg} 
 \begin{letter}
-    { [% firma %] \\
-    [% IF anrede == 'Herr' %]
+   {
+    [% firma %] \\
+    [% SWITCH anrede %]   
+    [% CASE 'Herr' %]
       z.Hd. [% anrede %]n [% ansprechpartner %] \\
-    [% END %]
-    [% IF anrede == 'Frau' %]
-      z.Hd.[% anrede %] [% ansprechpartner %] \\
+    [% CASE 'Frau' %]
+      z.Hd. [% anrede %]  [% ansprechpartner %] \\
+    [% CASE 'vertraulich' %]
+      z.Hd. [% ansprechpartner %] \\
     [% END %]
     [% strasse %] \\ 
-    [% ort %] }
-    % Dies ist übrigens ein Befehl: \begin{letter}{Adresse}
-    [% IF anrede == 'Herr' %]
-      \opening{ Sehr geehrter [% anrede %] [% ansprechpartner %],}
-    [% ELSIF anrede == 'Frau' %]
-      \opening{ Sehr geehrte [% anrede %] [% ansprechpartner %],}
-    [% ELSE %]
+    [% ort %]
+   }
+    %% Dies ist übrigens ein Kommentar
+    [% SWITCH anrede %]
+    [% CASE 'Herr' %]
+      \opening{ Sehr geehrter [% anrede %] [% ansprechpartner %], }
+    [% CASE 'Frau' %]
+      \opening{ Sehr geehrte [% anrede %] [% ansprechpartner %], }
+    [% CASE 'vertraulich' %]
+      \opening{ Salut, [% ansprechpartner_vertraulich %], }
+    [% CASE %]
       \opening{ Sehr geehrte Damen und Herren, }
-    [% endif %]      
+    [% END %]
 
       durch [% quelle %] auf Ihr Stellenangebot \enquote{ [%- bezeichnung -%] } aufmerksam
       geworden, möchte ich gern mehr über die Position erfahren.
@@ -51,12 +58,12 @@
       beschriebene interessant vorstellen.
 
       Meine Dokumente erstelle ich heute vorwiegend mit dem hervorragenden Textsatzsystem \LaTeX2e, weil
-      es Texte akkurater formatiert als herkömmliche Systeme wie etwa QuarkXPress, bin aber aufgrund meiner
-      Affinität zu allen Themen rund um die Softwareentwicklung und allem, was mit der Texterstellung zu tun hat,
-      dem Kennenlernen und der Verwendung immer neuer Technologien sehr zugeneigt. Zudem setze ich mich seit
-      Jahren mit computerlinguistischen Themen und Fragestellungen um Natural Language Processing auseinander,
-      was Ihrem Unternehmen ebenfalls zugute kommen könnte, wenn wir uns zu einer Zusammenarbeit entschließen
-      könnten.
+      es Texte akkurater formatiert als herkömmliche Systeme wie etwa QuarkXPress oder InDesign, bin aber
+      aufgrund meiner Affinität zu allen Themen rund um die Softwareentwicklung und allem, was mit der
+      Texterstellung zu tun hat, dem Kennenlernen und der Verwendung immer neuer Technologien sehr zugeneigt.
+      Zudem setze ich mich seit Jahren mit computerlinguistischen Themen und Fragestellungen um Natural Language
+      Processing auseinander, was Ihrem Unternehmen ebenfalls zugute kommen könnte, wenn wir uns zu einer
+      Zusammenarbeit entschließen könnten.
 
       Darüber hinaus arbeite ich seit mehr als 5 Jahren als Softwareentwickler bei verschiedenen Firmen, entwickle
       auch privat Software mit einer ganzen Reihe von Programmiersprachen und Technologien und bin auch mit der
