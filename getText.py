@@ -3,6 +3,8 @@
 from collections import Counter
 import math
 from sys import argv
+
+from linguistik import ngrammer
 from time import sleep
 from nltk.tokenize import TreebankWordTokenizer
 import regex
@@ -25,6 +27,17 @@ with open(argv[1]) as datei:
 
     lexikon_bereinigt = [lexem for lexem in lexikon if regex.match("[a-zA-ZäöüÄÖÜ]", lexem)]
 
+    ngramme = ngrammer(lexikon_bereinigt, 5)
+
+    for ngramm in ngramme:
+        print(ngramm)
+
+    print("=" * 150)
+
+    print()
+
+    sleep(2)
+
     zaehler = Counter(lexikon_bereinigt)
     frequenz = zaehler.most_common()
 
@@ -46,7 +59,7 @@ with open(argv[1]) as datei:
 
     drittel = math.floor(len(frequenz) / 3)
 
-    print("Mittleres Drittel beginn bei Lemma {}.\n".format(drittel * 2))
+    print("Mittleres Drittel beginnt bei Lemma {}.\n".format(drittel * 2))
     
     print("Das mittlere Drittel (der Frequenzanalyse gemäß der semantisch relevanteste Teil des Textes):\n")
 
