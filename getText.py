@@ -10,14 +10,17 @@ tokenizer = TreebankWordTokenizer()
 
 with open(argv[1]) as datei:
     latex = datei.read()
-    text = regex.search(r'\\opening\{ .*, }(.*)\\closing', latex, regex.S|regex.M)
-    text = text.group(1)
-    
-    text = regex.sub("[.;\\\]", "", text)
-    text = regex.sub("\\enquote\{", "", text)
-    text = regex.sub("\}", "", text)
-    
-    lexikon = tokenizer.tokenize(text)
+    text = regex.search(r'(\\opening\{ .*, })?(.*)(\\closing)?', latex, regex.S|regex.M)
+
+    if argv[1].endswith('.tex'):
+        text = text.group(2)
+        text = regex.sub("[.;\\\]", "", text)
+        text = regex.sub("\\enquote\{", "", text)
+        text = regex.sub("\}", "", text)
+    else:
+        text = text.group()
+        
+    lexikon = tokenizer.tokenize(str(text))
 
     lexikon_bereinigt = [lexem for lexem in lexikon if regex.match("[a-zA-ZäöüÄÖÜ]", lexem)]
 
@@ -25,6 +28,8 @@ with open(argv[1]) as datei:
     haeufig = zaehler.most_common(10)
 
     lexikon = list(enumerate(lexikon_bereinigt))
+
+    # Nur zur Kontrolle, wird ersetzt durch Redis-, MongoDB- und/oder SQL-Anbindung:
     
     print(lexikon)
 
