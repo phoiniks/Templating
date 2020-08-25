@@ -15,20 +15,20 @@ my $log = Log::Log4perl->get_logger();
 $log->info( "BEGINN" );
 
 my $parameters = Hash::Ordered->new(
-    'Bezeichnung: '     => 'Bezeichnung',
-    'Firma: '           => 'Firma',
-    'Anrede: '          => 'Anrede',
-    'Ansprechpartner: ' => 'Ansprechpartner',
-    'Straße: '          => 'Straße',
-    'Ort: '             => 'Ort',
-    'Gehalt: '          => 'Gehalt',
-    'Quelle: '          => 'Quelle',
-    'Telefon: '         => 'Telefon',
-    'E-Mail: '          => 'E-Mail',
-    'Angebotstext: '    => 'Angebotstext',
+    'Bezeichnung: '     => 'BEZEICHNUNG',
+    'Firma: '           => 'FIRMA',
+    'Kennziffer: '      => 'KENNZIFFER',
+    'Anrede: '          => 'ANREDE',
+    'Ansprechpartner: ' => 'ANSPRECHPARTNER',
+    'Straße: '          => 'STRASSE',
+    'Ort: '             => 'ORT',
+    'Gehalt: '          => 'GEHALT',
+    'Quelle: '          => 'QUELLE',
+    'Telefon: '         => 'TELEFON',
+    'E-Mail: '          => 'E-MAIL',
+    'Angebotstext: '    => 'ANGEBOTSTEXT',
     );
 
 my $yaml = DumpFile( "PARAMETERS.YAML", $parameters);
 
 $log->info("ENDE");
-
