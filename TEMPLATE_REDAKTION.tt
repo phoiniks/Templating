@@ -48,6 +48,8 @@
       \opening{ Sehr geehrte Damen und Herren, }
     [% END %]
 
+
+%%ANFANG
       durch [% quelle %] auf Ihr Stellenangebot \enquote{ [%- bezeichnung -%] } aufmerksam
       geworden, möchte ich gern mehr über die Position erfahren.
       
@@ -77,7 +79,7 @@
       Sollte Ihnen mein hier freilich nur grob umrissenes Profil ebenso zusagen wie mir Ihr Stellenangebot,
       so würde ich mich freuen, Sie und Ihr Unternehmen bei einem unverbindlichen Gespräch näher kennen
       lernen zu dürfen, und verbleibe
-
+%%ENDE
 
 \closing{mit freundlichen Grüßen}
 \par
