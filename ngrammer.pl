@@ -1,9 +1,6 @@
 #!/usr/bin/perl
 
 use Modern::Perl;
-use Data::Dumper;
-
-my @liste = qw( Dies ist eine blöde Liste );
 
 
 sub ngrammer {
@@ -23,10 +20,17 @@ sub ngrammer {
 }
 
 
-my $ergebnis = ngrammer( \@liste, 3 );
+$/ = undef;
 
-print Dumper( $ergebnis );
+open my $text, "<", $ARGV[0];
+
+my @vokabular = split /\s+/, <$text>;
+
+@vokabular = grep { /\w+/ } @vokabular;
+
+
+my $ergebnis = ngrammer( \@vokabular, $ARGV[1] );
 
 for ( @$ergebnis ) {
-    print "@$_ ";
+    printf "%s\n", join " ", @$_;
 }
