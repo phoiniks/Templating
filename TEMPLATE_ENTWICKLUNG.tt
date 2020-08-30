@@ -11,7 +11,7 @@
 \pagenumbering{gobble}
 \hyphenation{Office Pro-gram-mie-rer Bash-Kennt-nis-sen}
 \begin{document}
-\subject{ [% bezeichnung %][% IF kennziffer %], Kennziffer: [% kennziffer %] }
+\subject{ [% bezeichnung %][% IF kennziffer %], Kennziffer: [% kennziffer %] [% END %] }
 \backaddress{Andreas Grell,
   Kühnehöfe 25,
   D-22761 Hamburg
@@ -47,7 +47,6 @@
     [% CASE %]
       \opening{ Sehr geehrte Damen und Herren, }
     [% END %]
-
 %%ANFANG
       durch [% IF anrede == 'vertraulich' %] eure [% ELSE %] Ihre [% END %] Stellenanzeige bei [% quelle %] auf
       [% firma %] aufmerksam geworden, möchte ich mich mit dem vorliegenden Anschreiben als \enquote{[% bezeichnung %]}
@@ -55,7 +54,7 @@
       
       Begonnen habe ich, nach einem als C/C++-Programmierer unter Linux abgelegten Zertifikat, bei HAVI Solutions
       GmbH \& Co. KG, einem Hamburger Spezialisten für Datenmigration, als C-, Perl- und Bash-Programmierer, bei
-      dem ich mich sowohl mit der Transformation von SQL-Quelldatenstrukturen in ebensolche Zieldatenstrukturen
+      dem ich mich sowohl mit der Transformation von SQL-Quelldatenstrukturen (MySQL) in ebensolche Zieldatenstrukturen
       als auch der Extraktion von Bilddaten aus obsoleten Datencontainerformaten auseinandersetzte. Um die besagten
       Daten aus den mit herkömmlicher Software nicht mehr zugänglichen Containern zu extrahieren, schrieb ich in
       C eigene Programme. Nach der Extraktion verarbeitete ich die Bilddaten mit eigenen Python-Programmen weiter.
@@ -69,14 +68,15 @@
       Delticom an, in deren Rahmen ich eine Google-Suggest-artige Funktionalität auf der Grundlage von Perl und AJAX
       entwickelte.
 
-      Zuletzt wirkte ich bei DSS in Stockelsdorf an der Funktionserweiterung der Aboverwaltung mit. Die
-      verwendeten Programmiersprachen waren hier Perl und das zugegebenermaßen schon etwas angestaubte COBOL,
-      das ich eigens für die von mir zu bewältigenden Aufgaben erlernte. Als Datenbanksystem wurde dort die
-      Berkeley Database verwendet.
+      Zuletzt wirkte ich bei DSS in Stockelsdorf an der Funktionserweiterung der Aboverwaltung mit. Die verwendeten
+      Programmiersprachen waren hier Perl und COBOL, das ich eigens für die von mir zu bewältigenden Aufgaben erlernte.
+      Als Datenbanksystem wurde dort die Berkeley Database verwendet.
 
       Nach einem von Dezember 2019 bis Februar 2020 absolvierten Lehrgang verfüge ich auch über Kenntnisse in Java.
       Nachdem ich mir bereits während des Lehrgangs die Grundlagen in Swing, JDBC und Maven im Selbststudium angeeignet
-      habe, beschäftige ich mich momentan auch mit JPA und Hibernate.
+      habe, beschäftige ich mich momentan auch mit JPA und Hibernate. Darüber hinaus interessiere ich mich unter
+      Verwendung der Programmiersprache Python für Natural Language Processing und neuronale Netze -- zwei
+      Technologien, in die ich mich gerade einarbeite.
 
       Als Sprach- und Literaturwissenschaftler sowie altgedienter Schlussredakteur mit jahrzehntelanger
       Redaktionserfahrung bei diversen Zeitschriftenverlagen (DER SPIEGEL, TV Movie, TV Spielfilm, PRINZ etc.)
@@ -85,7 +85,7 @@
       auch mündlich zu vermitteln. Als Text-Layout-System verwende ich mittlerweile bevorzugt \LaTeXe, weil es Texte
       akkurater formatiert als die gängigen Office-Anwendungen.
 
-      Verfügbar bin ich ab sofort für ein Bruttojahresgehalt von [% gehalt %] Euro.
+      Verfügbar bin ich ab sofort[% IF gehalt %] für ein Bruttojahresgehalt von [% gehalt %] Euro[% END %].
 
       Unter https://github.com/phoiniks [% IF anrede == 'vertraulich' %] könnt ihr [% ELSE %] können Sie [% END %] im
       Verlauf von Projekten entstandene Codeschnipsel besichtigen. Sollten [% IF anrede == 'vertraulich' %] euch [% ELSE %]
@@ -93,7 +93,6 @@
       mich freuen, persönlich mit [% IF anrede == 'vertraulich' %] euch [% ELSE %] Ihnen [% END %] über das oben genannte
       Angebot zu sprechen.
 %%ENDE
-
       [% IF anrede == 'vertraulich' %]
         \closing{ Liebe Grüße }
       [% ELSE %]
