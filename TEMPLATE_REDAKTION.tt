@@ -11,7 +11,7 @@
 \pagenumbering{gobble}
 \hyphenation{ Office }
 \begin{document}
-\subject{ [% bezeichnung %] }
+\subject{ [% bezeichnung %][% IF kennziffer %], Kennziffer: [% kennziffer %] [% END %] }
 \backaddress{Andreas Grell,
   Kühnehöfe 25,
   D-22761 Hamburg
@@ -47,19 +47,19 @@
     [% CASE %]
       \opening{ Sehr geehrte Damen und Herren, }
     [% END %]
-
-
 %%ANFANG
-      durch [% quelle %] auf Ihr Stellenangebot \enquote{ [%- bezeichnung -%] } aufmerksam
-      geworden, möchte ich gern mehr über die Position erfahren.
+      durch [% IF anrede == 'vertraulich' %] eure [% ELSE %] Ihre [% END %] Stellenanzeige bei [% quelle %] auf
+      [% firma %] aufmerksam geworden, möchte ich mich mit dem vorliegenden Anschreiben als \enquote{[% bezeichnung %]}
+      bei [% IF anrede == 'vertraulich' %] euch [% ELSE %] Ihnen [% END %] bewerben.
       
       Als Sprach- und Literaturwissenschaftler sowie altgedienter Schlussredakteur mit jahrzehntelanger
       Redaktionserfahrung bei diversen Zeitschriftenverlagen (DER SPIEGEL, TV Movie, TV Spielfilm, PRINZ etc.)
       verfüge ich über die Fähigkeit, selbst fachfremden ZeitgenossINNen auch komplexe technische Sachverhalte
-      auf angenehme Art und Weise intersubjektiv zu vermitteln, und könnte mir eine Tätigkeit wie die von Ihnen
-      beschriebene interessant vorstellen.
+      auf angenehme allgemeinverständlich sowohl schriftlich als auch mündlich zu vermitteln, und könnte mir
+      eine Tätigkeit wie die von [% IF anrede == 'vertraulich' %] euch [% ELSE %] Ihnen [% END %] beschriebene
+      interessant vorstellen.
 
-      Meine Dokumente erstelle ich heute vorwiegend mit dem hervorragenden Textsatzsystem \LaTeX2e, weil
+      Meine Dokumente erstelle ich heute vorwiegend mit dem hervorragenden Textsatzsystem \LaTeXe, weil
       es Texte akkurater formatiert als herkömmliche Systeme wie etwa QuarkXPress oder InDesign, bin aber
       aufgrund meiner Affinität zu allen Themen rund um die Softwareentwicklung und allem, was mit der
       Texterstellung zu tun hat, dem Kennenlernen und der Verwendung immer neuer Technologien sehr zugeneigt.
@@ -72,16 +72,17 @@
       Dokumentation in der Informationstechnologie (etwa bei ARIVA: ARDoc, siehe Lebenslauf) sowohl auf
       Deutsch als auch auf Englisch vertraut.
 
-      Verfügbar bin ich ab sofort für ein Bruttojahresgehalt von [% gehalt %] Euro, wobei die tatsächliche Höhe
-      des Gehalts selbstverständlich immer abhängig von gewissen Rahmenbedingungen (etwa der Anzahl der Urlaubstage)
-      variieren kann.
+      Verfügbar bin ich ab sofort[% IF gehalt %] für ein Bruttojahresgehalt von [% gehalt %] Euro[% END %].
 
-      Sollte Ihnen mein hier freilich nur grob umrissenes Profil ebenso zusagen wie mir Ihr Stellenangebot,
-      so würde ich mich freuen, Sie und Ihr Unternehmen bei einem unverbindlichen Gespräch näher kennen
-      lernen zu dürfen, und verbleibe
+      Sollte [% IF anrede == 'vertraulich' %] euch [% ELSE %] Ihnen [% END %] mein hier freilich nur grob
+      umrissenes Profil zusagen, so würde ich mich freuen, persönlich mit [% IF anrede == 'vertraulich' %]
+      euch [% ELSE %] Ihnen [% END %] über das oben genannte Angebot zu sprechen.
 %%ENDE
-
-\closing{mit freundlichen Grüßen}
+      [% IF anrede == 'vertraulich' %]
+        \closing{ Liebe Grüße }
+      [% ELSE %]
+        \closing{ Mit freundlichen Grüßen }
+      [% END %]
 \par
 \encl{Lebenslauf und Zeugnisse} 
 \end{letter} 
